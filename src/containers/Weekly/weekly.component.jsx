@@ -28,7 +28,6 @@ class Weekly extends Component {
 	};
 
 	render() {
-		const { weeklyData, dailyData } = this.state;
 		return (
 			<div className="daily-container">
 				<div className="container">
