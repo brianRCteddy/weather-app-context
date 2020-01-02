@@ -10,6 +10,8 @@ const Daily = ({ reading }) => {
 	newDate.setTime(weekday);
 
 	const imgUrl = `owf owf-${reading.weather[0].id} owf-5x`;
+	const celsius_min = reading.main.temp_min - 273.15;
+	const celsius_max = reading.main.temp_max - 273.15;
 
 	return (
 		<div className="col-sm-2">
@@ -18,8 +20,8 @@ const Daily = ({ reading }) => {
 				<p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
 				<i className={imgUrl} />
 				<h3>
-					<span className="min-temp">{Math.round(reading.main.temp_min)} °F </span>
-					<span className="max-temp">{Math.round(reading.main.temp_max)} °F</span>
+					<span className="min-temp">{Math.round(celsius_min)} °C -</span>
+					<span className="max-temp"> {Math.round(celsius_max)} °C</span>
 				</h3>
 				<div className="card-body">
 					<p className="card-text">{reading.weather[0].description}</p>
