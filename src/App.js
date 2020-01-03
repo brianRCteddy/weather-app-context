@@ -2,6 +2,7 @@ import React from 'react';
 
 import Weekly from './containers/Weekly/weekly.component';
 import Header from './components/Header/header.component';
+import Hourly from './components/Hourly/hourly.component';
 import './App.css';
 
 function App() {

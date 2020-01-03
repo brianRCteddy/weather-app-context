@@ -9,14 +9,7 @@ class WeatherProvider extends Component {
 	state = {
 		fullData: [],
 		dailyData: [],
-		hourlyDataPrac: [],
-		hourlyData: {
-			first: [],
-			second: [],
-			third: [],
-			fourth: [],
-			fifth: []
-		}
+		hourlyData: []
 	};
 
 	componentDidMount() {
@@ -42,35 +35,46 @@ class WeatherProvider extends Component {
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
 			const dateNow = new Date();
+			console.log(dateNow);
 
-			const formattedDateTime = moment(dateNow).format('YYYY-MM-DD h:mm:ss');
+			const formattedDateTime = moment.utc(dateNow).format('YYYY-MM-DD h:mm:ss');
 			const final = formattedDateTime.toString();
-
-			//to output Friday
-			//const firstDay = moment(dateNow).format('dddd');
 
 			const formattedDate = toJSDate(final);
 
-			const dailyData = data.list.filter((reading) => reading.dt_txt.includes(formattedDate));
+			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('18:00:00'));
 
-			const hourlyDataPrac = data.list.filter((reading) => reading.dt_txt);
+			const hourlyData = data.list.filter((reading) => reading.dt_txt.includes(formattedDate));
 			this.setState(
 				{
 					fullData: data.list,
-					dailyData: dailyData
-					// hourlyDate: {
-					// 	first:
-					// }
+					dailyData: dailyData,
+					hourlyData: data.list
 				},
 				() => console.log(this.state)
 			);
 		});
 	}
 
+	hourlyClickHandler = () => {};
+
 	render() {
-		const { dailyData, fullData } = this.state;
-		return <Provider value={{ dailyData, fullData }}>{this.props.children}</Provider>;
+		const { dailyData, fullData, hourlyData } = this.state;
+		return <Provider value={{ dailyData, fullData, hourlyData }}>{this.props.children}</Provider>;
 	}
 }
 
 export { WeatherProvider, Consumer as WeatherConsumer };
+
+/////////
+
+//to output Friday
+//const firstDay = moment(dateNow).format('dddd');
+
+// const newDailyData = {
+// 	...dailyData[0],
+// 	day: 'Friday'
+// };
+// console.log(newDailyData);
+
+// const finalDailyData = data.list.filter((reading) => reading.dt_txt.includes('Friday'));
