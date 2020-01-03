@@ -7,7 +7,7 @@ class Weekly extends Component {
 	render() {
 		return (
 			<WeatherConsumer>
-				{(dailyData) => (
+				{({ dailyData, fullData }) => (
 					<div className="weekly-container">
 						<div className="container">
 							<h1 className="display-1 jumbotron">5 Day Forecast</h1>
