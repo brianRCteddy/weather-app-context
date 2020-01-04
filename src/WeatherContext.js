@@ -9,7 +9,8 @@ class WeatherProvider extends Component {
 	state = {
 		fullData: [],
 		dailyData: [],
-		hourlyData: []
+		hourlyData: [],
+		showHourly: false
 	};
 
 	componentDidMount() {
@@ -34,33 +35,47 @@ class WeatherProvider extends Component {
 		};
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
-			const dateNow = new Date();
-			console.log(dateNow);
+			//const dateNow = new Date();
 
-			const formattedDateTime = moment.utc(dateNow).format('YYYY-MM-DD h:mm:ss');
-			const final = formattedDateTime.toString();
-
+			const dateNow = moment.utc().format('YYYY-MM-DD h:mm:ss');
+			const stillUtc = moment.utc(dateNow).toDate();
+			const final = moment(stillUtc).local().format('YYYY-MM-DD h:mm:ss');
+			console.log(final);
 			const formattedDate = toJSDate(final);
 
-			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('18:00:00'));
+			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
 
 			const hourlyData = data.list.filter((reading) => reading.dt_txt.includes(formattedDate));
 			this.setState(
 				{
 					fullData: data.list,
 					dailyData: dailyData,
-					hourlyData: data.list
+					hourlyData: hourlyData
 				},
 				() => console.log(this.state)
 			);
 		});
 	}
 
-	hourlyClickHandler = () => {};
+	toggleClickHandler = () => {
+		this.setState({ showHourly: !this.state.showHourly });
+	};
 
 	render() {
-		const { dailyData, fullData, hourlyData } = this.state;
-		return <Provider value={{ dailyData, fullData, hourlyData }}>{this.props.children}</Provider>;
+		const { dailyData, fullData, hourlyData, showHourly } = this.state;
+		return (
+			<Provider
+				value={{
+					dailyData: dailyData,
+					fullData: fullData,
+					hourlyData: hourlyData,
+					showHourly: showHourly,
+					onToggle: this.toggleClickHandler
+				}}
+			>
+				{this.props.children}
+			</Provider>
+		);
 	}
 }
 

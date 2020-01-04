@@ -18,9 +18,9 @@ class Daily extends Component {
 
 		return (
 			<WeatherConsumer>
-				{({ hourlyData }) => (
+				{({ onToggle }) => (
 					<div className="col-sm-2">
-						<div className="card" onClick={this.props.onToggleClick}>
+						<div className="card" onClick={onToggle}>
 							<h3 className="card-title">{moment(newDate).format('dddd')}</h3>
 							<p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
 							<i className={imgUrl} />

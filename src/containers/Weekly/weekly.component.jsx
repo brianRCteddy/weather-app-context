@@ -8,26 +8,19 @@ class Weekly extends Component {
 	state = {
 		showHourly: false
 	};
-
-	toggleClickHandler = () => {
-		this.setState({ showHourly: !this.state.showHourly });
-	};
-
 	render() {
 		return (
 			<WeatherConsumer>
-				{({ dailyData, hourlyData }) => (
+				{({ dailyData, hourlyData, onToggle, showHourly }) => (
 					<div className="weekly-container">
 						<div className="container">
 							<h1 className="display-1 jumbotron">5 Day Forecast</h1>
 							<h5 className="display-5 text-muted">Mandaluyong, PH</h5>
 							<div className="row justify-content-center">
-								{dailyData.map((reading, index) => (
-									<Daily reading={reading} key={index} onToggleClick={this.toggleClickHandler} />
-								))}
+								{dailyData.map((reading, index) => <Daily reading={reading} key={index} />)}
 							</div>
 							<br />
-							{this.state.showHourly ? (
+							{showHourly ? (
 								<div className="container">
 									<h1 className="display-1 jumbotron">Hourly Forecast</h1>
 									<div className="row justify-content-center">
