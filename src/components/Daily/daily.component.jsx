@@ -9,8 +9,8 @@ const Daily = () => {
 	return (
 		<WeatherConsumer>
 			{({ onToggle, dailyData }) =>
-				dailyData.map((reading) => (
-					<div className="col-sm-2">
+				dailyData.map((reading, index) => (
+					<div className="col-sm-2" key={index}>
 						<div className="card" onClick={onToggle}>
 							<h3 className="card-title">{moment(reading.dt * 1000).format('dddd')}</h3>
 							<p className="text-muted">{moment(reading.dt * 1000).format('MMMM Do, h:mm a')}</p>

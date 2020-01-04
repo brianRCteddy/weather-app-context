@@ -7,7 +7,7 @@ import Hourly from '../../components/Hourly/hourly.component';
 const Weekly = ({ fullData }) => {
 	return (
 		<WeatherConsumer>
-			{({ hourlyData, showHourly }) => (
+			{({ hourlyData, showHourly, dailyData }) => (
 				<div className="weekly-container">
 					<div className="container">
 						<h1 className="display-1 jumbotron">5 Day Forecast</h1>

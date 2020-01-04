@@ -13,7 +13,7 @@ function App() {
 				<div className="App">
 					<Header />
 					<Weekly />
-					{/* <Hourly hourly={hourlyData} /> */}
+					{/* <Hourly /> */}
 				</div>
 			)}
 		</WeatherConsumer>
