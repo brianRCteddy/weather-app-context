@@ -7,20 +7,20 @@ import Hourly from '../../components/Hourly/hourly.component';
 const Weekly = ({ fullData }) => {
 	return (
 		<WeatherConsumer>
-			{({ hourlyData, showHourly, fullData }) => (
+			{({ hourlyData, showHourly }) => (
 				<div className="weekly-container">
 					<div className="container">
 						<h1 className="display-1 jumbotron">5 Day Forecast</h1>
 						<h5 className="display-5 text-muted">Mandaluyong, PH</h5>
 						<div className="row justify-content-center">
-							<Daily />)}
+							<Daily />
 						</div>
 						<br />
 						{showHourly ? (
 							<div className="container">
 								<h1 className="display-1 jumbotron">Hourly Forecast</h1>
 								<div className="row justify-content-center">
-									{hourlyData.map((data, index) => <Hourly data={data} key={index} />)}
+									<Hourly />
 								</div>
 							</div>
 						) : (

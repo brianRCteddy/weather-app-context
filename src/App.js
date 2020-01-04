@@ -9,10 +9,10 @@ import './App.css';
 function App() {
 	return (
 		<WeatherConsumer>
-			{({ fullData }) => (
+			{({ showHourly }) => (
 				<div className="App">
 					<Header />
-					<Weekly fulldata={fullData} />
+					<Weekly />
 					{/* <Hourly hourly={hourlyData} /> */}
 				</div>
 			)}
