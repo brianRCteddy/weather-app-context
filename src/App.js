@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { WeatherConsumer } from './WeatherContext';
 import Weekly from './containers/Weekly/weekly.component';
 import Header from './components/Header/header.component';
 import Hourly from './components/Hourly/hourly.component';
@@ -7,10 +8,15 @@ import './App.css';
 
 function App() {
 	return (
-		<div className="App">
-			<Header />
-			<Weekly />
-		</div>
+		<WeatherConsumer>
+			{({ fullData }) => (
+				<div className="App">
+					<Header />
+					<Weekly fulldata={fullData} />
+					{/* <Hourly hourly={hourlyData} /> */}
+				</div>
+			)}
+		</WeatherConsumer>
 	);
 }
 

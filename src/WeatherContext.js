@@ -16,30 +16,11 @@ class WeatherProvider extends Component {
 	componentDidMount() {
 		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
 
-		// const toJSDate = (dT) => {
-		// 	const dateTime = dT.split(' ');
-		// 	const date = dateTime[0].split('-');
-
-		// 	const year = date[0];
-		// 	const month = date[1];
-		// 	const day = Number(date[2]) + 1;
-		// 	let newDay = '' + day.toString();
-
-		// 	if (newDay.length < 2) {
-		// 		newDay = '0' + newDay;
-		// 	}
-
-		// 	const transformedDate = [ year, month, newDay ].join('-');
-
-		// 	return transformedDate;
-		// };
 		const dateNow = new Date();
 
 		const addDays = (date, days) => {
 			const copy = new Date(Number(date));
-
 			copy.setDate(date.getDate() + days);
-
 			return copy;
 		};
 
@@ -50,7 +31,7 @@ class WeatherProvider extends Component {
 		};
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
-			const newDate = addDays(dateNow, 1);
+			const newDate = addDays(dateNow, 4);
 			const formatDate = moment(newDate).format('YYYY-MM-DD h:mm:ss');
 
 			const dateOnly = getDateOnly(formatDate);
