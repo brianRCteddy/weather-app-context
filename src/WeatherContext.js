@@ -16,36 +16,49 @@ class WeatherProvider extends Component {
 	componentDidMount() {
 		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
 
-		const toJSDate = (dT) => {
-			const dateTime = dT.split(' ');
-			const date = dateTime[0].split('-');
+		// const toJSDate = (dT) => {
+		// 	const dateTime = dT.split(' ');
+		// 	const date = dateTime[0].split('-');
 
-			const year = date[0];
-			const month = date[1];
-			const day = Number(date[2]) + 1;
-			let newDay = '' + day.toString();
+		// 	const year = date[0];
+		// 	const month = date[1];
+		// 	const day = Number(date[2]) + 1;
+		// 	let newDay = '' + day.toString();
 
-			if (newDay.length < 2) {
-				newDay = '0' + newDay;
-			}
+		// 	if (newDay.length < 2) {
+		// 		newDay = '0' + newDay;
+		// 	}
 
-			const transformedDate = [ year, month, newDay ].join('-');
+		// 	const transformedDate = [ year, month, newDay ].join('-');
 
-			return transformedDate;
+		// 	return transformedDate;
+		// };
+		const dateNow = new Date();
+
+		const addDays = (date, days) => {
+			const copy = new Date(Number(date));
+
+			copy.setDate(date.getDate() + days);
+
+			return copy;
+		};
+
+		const getDateOnly = (date) => {
+			const dateTime = date.split(' ');
+			const dateSplit = dateTime[0];
+			return dateSplit;
 		};
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
-			//const dateNow = new Date();
+			const newDate = addDays(dateNow, 1);
+			const formatDate = moment(newDate).format('YYYY-MM-DD h:mm:ss');
 
-			const dateNow = moment.utc().format('YYYY-MM-DD h:mm:ss');
-			const stillUtc = moment.utc(dateNow).toDate();
-			const final = moment(stillUtc).local().format('YYYY-MM-DD h:mm:ss');
-			console.log(final);
-			const formattedDate = toJSDate(final);
+			const dateOnly = getDateOnly(formatDate);
+			console.log(dateOnly);
 
 			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
 
-			const hourlyData = data.list.filter((reading) => reading.dt_txt.includes(formattedDate));
+			const hourlyData = data.list.filter((reading) => reading.dt_txt.includes(dateOnly));
 			this.setState(
 				{
 					fullData: data.list,

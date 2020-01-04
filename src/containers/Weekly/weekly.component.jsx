@@ -5,13 +5,10 @@ import Daily from '../../components/Daily/daily.component';
 import Hourly from '../../components/Hourly/hourly.component';
 
 class Weekly extends Component {
-	state = {
-		showHourly: false
-	};
 	render() {
 		return (
 			<WeatherConsumer>
-				{({ dailyData, hourlyData, onToggle, showHourly }) => (
+				{({ dailyData, hourlyData, showHourly }) => (
 					<div className="weekly-container">
 						<div className="container">
 							<h1 className="display-1 jumbotron">5 Day Forecast</h1>
@@ -35,7 +32,6 @@ class Weekly extends Component {
 				)}
 			</WeatherConsumer>
 		);
-		//<div className="row justify-content-center">{dailyData.map((reading, index) => <Daily reading={reading} key={index} />)}</div>;
 	}
 }
 
