@@ -5,7 +5,7 @@ import { WeatherConsumer } from '../../WeatherContext';
 import './daily.styles.css';
 var moment = require('moment');
 
-const Daily = ({ reading }) => {
+const Daily = ({ reading, index }) => {
 	let newDate = new Date();
 	const weekday = reading.dt * 1000;
 	newDate.setTime(weekday);
@@ -16,9 +16,9 @@ const Daily = ({ reading }) => {
 
 	return (
 		<WeatherConsumer>
-			{({ onToggle, dailyData }) => (
+			{({ onToggle }) => (
 				<div className="col-sm-2">
-					<div className="card" onClick={onToggle}>
+					<div className="card" onClick={() => onToggle(index)}>
 						<h3 className="card-title">{moment(newDate).format('dddd')}</h3>
 						<p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
 						<i className={imgUrl} />

@@ -45,27 +45,33 @@ class WeatherProvider extends Component {
 			this.setState(
 				{
 					fullData: data.list,
-					dailyData: dailyData,
-					hourlyData: hourlyData
+					dailyData: dailyData
 				},
 				() => console.log(this.state)
 			);
 		});
 	}
 
-	toggleClickHandler = (key) => {
+	toggleClickHandler = (index) => {
 		const { fullData } = this.state;
-		const groupedData = [];
-		if (key === 0) {
+		let tempArray = [];
+		const groupOfArray = [];
+		let i = 0;
+		let j = 0;
+		const chunk = 8;
+
+		for (i = 2, j = fullData.length; i < j; i += chunk) {
+			tempArray = fullData.slice(i, i + chunk);
+			groupOfArray.push(tempArray);
 		}
-		for (let i = 0; i < fullData.length; i++) {
-			const element = fullData[i];
-		}
-		this.setState({ showHourly: !this.state.showHourly });
+		const finalArray = groupOfArray[index];
+
+		this.setState({ showHourly: !this.state.showHourly, hourlyData: finalArray });
 	};
 
 	render() {
 		const { dailyData, fullData, hourlyData, showHourly } = this.state;
+		console.log(this.state);
 		return (
 			<Provider
 				value={{

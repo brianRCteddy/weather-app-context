@@ -5,7 +5,6 @@ import { WeatherConsumer } from '../../WeatherContext';
 var moment = require('moment');
 
 const Hourly = ({ data }) => {
-	//const { data } = this.props;
 	let newDate = new Date();
 	const weekday = data.dt * 1000;
 	newDate.setTime(weekday);
@@ -13,7 +12,6 @@ const Hourly = ({ data }) => {
 	const imgUrl = `owf owf-${data.weather[0].id} owf-5x`;
 	const celsius_min = data.main.temp_min - 273.15;
 	const celsius_max = data.main.temp_max - 273.15;
-
 	return (
 		<WeatherConsumer>
 			{({ hourlyData }) => (
