@@ -16,23 +16,6 @@ class WeatherProvider extends Component {
 	componentDidMount() {
 		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
 
-		// const toJSDate = (dT) => {
-		// 	const dateTime = dT.split(' ');
-		// 	const date = dateTime[0].split('-');
-
-		// 	const year = date[0];
-		// 	const month = date[1];
-		// 	const day = Number(date[2]) + 1;
-		// 	let newDay = '' + day.toString();
-
-		// 	if (newDay.length < 2) {
-		// 		newDay = '0' + newDay;
-		// 	}
-
-		// 	const transformedDate = [ year, month, newDay ].join('-');
-
-		// 	return transformedDate;
-		// };
 		const dateNow = new Date();
 
 		const addDays = (date, days) => {
@@ -70,7 +53,14 @@ class WeatherProvider extends Component {
 		});
 	}
 
-	toggleClickHandler = () => {
+	toggleClickHandler = (key) => {
+		const { fullData } = this.state;
+		const groupedData = [];
+		if (key === 0) {
+		}
+		for (let i = 0; i < fullData.length; i++) {
+			const element = fullData[i];
+		}
 		this.setState({ showHourly: !this.state.showHourly });
 	};
 
