@@ -26,17 +26,66 @@ const getDateOnly = (date) => {
 	return dateSplit;
 };
 
-const groupedUsers = (users, index) => {
-	let { i, j } = 0;
+toggleClickHandler = (index) => {
+	const { fullData } = this.state;
+	const hourly = fullData.filter((reading) => reading);
 	let tempArray = [];
-	let finalArray = [];
-	const chunk = 3;
+	const groupOfArray = [];
+	let i = 0;
+	let j = 0;
+	const chunk = 8;
 
-	for (i = 0, j = users.length; i < j; i += chunk) {
-		tempArray = users.slice(i, i + chunk);
-		finalArray.push(tempArray);
+	for (i = 5, j = fullData.length; i < j; i += chunk) {
+		tempArray = fullData.slice(i, i + chunk);
+		groupOfArray.push(tempArray);
 	}
-	return finalArray[index];
+	const finalArray = groupOfArray[index];
+
+	this.setState({ showHourly: !this.state.showHourly, hourlyData: finalArray });
 };
 
-groupedUsers(users, 1);
+/////////////////////////////////
+
+const dateNow = new Date();
+const addDays = (date, days) => {
+	const copy = new Date(Number(dateNow));
+	copy.setDate(dateNow.getDate() + days);
+	return copy;
+};
+
+const getDateOnly = (date) => {
+	const dateTime = date.split(' ');
+	const dateSplit = dateTime[0];
+	return dateSplit;
+};
+
+const newDate = addDays(dateNow, 4);
+const formatDate = moment(newDate).format('YYYY-MM-DD h:mm:ss');
+
+const dateOnly = getDateOnly(formatDate);
+console.log(dateOnly);
+const hourlyData = data.list.filter((reading) => reading.dt_txt.includes(dateOnly));
+
+toggleClickHandler = (index) => {
+	const { fullData } = this.state;
+	const dateNow = new Date();
+	const addDays = (date, days) => {
+		const copy = new Date(Number(dateNow));
+		copy.setDate(dateNow.getDate() + days);
+		return copy;
+	};
+
+	const getDateOnly = (date) => {
+		const dateTime = date.split(' ');
+		const dateSplit = dateTime[0];
+		return dateSplit;
+	};
+	const newDate = addDays(dateNow, index + 1);
+	const formatDate = moment(newDate).format('YYYY-MM-DD h:mm:ss');
+
+	const dateOnly = getDateOnly(formatDate);
+
+	const hourly = fullData.filter((reading) => reading.dt_txt.includes(dateOnly));
+
+	this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly });
+};

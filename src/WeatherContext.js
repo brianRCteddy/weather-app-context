@@ -16,6 +16,21 @@ class WeatherProvider extends Component {
 	componentDidMount() {
 		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
 
+		fetch(weatherUrl).then((res) => res.json()).then((data) => {
+			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
+
+			this.setState(
+				{
+					fullData: data.list,
+					dailyData: dailyData
+				},
+				() => console.log(this.state)
+			);
+		});
+	}
+
+	toggleClickHandler = (index) => {
+		const { fullData } = this.state;
 		const dateNow = new Date();
 
 		const addDays = (date, days) => {
@@ -29,42 +44,14 @@ class WeatherProvider extends Component {
 			const dateSplit = dateTime[0];
 			return dateSplit;
 		};
+		const newDate = addDays(dateNow, index + 1);
+		const formatDate = moment(newDate).format('YYYY-MM-DD h:mm:ss');
 
-		fetch(weatherUrl).then((res) => res.json()).then((data) => {
-			const newDate = addDays(dateNow, 4);
-			const formatDate = moment(newDate).format('YYYY-MM-DD h:mm:ss');
+		const dateOnly = getDateOnly(formatDate);
 
-			const dateOnly = getDateOnly(formatDate);
-			console.log(dateOnly);
+		const hourly = fullData.filter((reading) => reading.dt_txt.includes(dateOnly));
 
-			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
-
-			const hourlyData = data.list.filter((reading) => reading.dt_txt.includes(dateOnly));
-			this.setState(
-				{
-					fullData: data.list,
-					dailyData: dailyData
-				},
-				() => console.log(this.state)
-			);
-		});
-	}
-
-	toggleClickHandler = (index) => {
-		const { fullData } = this.state;
-		let tempArray = [];
-		const groupOfArray = [];
-		let i = 0;
-		let j = 0;
-		const chunk = 8;
-
-		for (i = 2, j = fullData.length; i < j; i += chunk) {
-			tempArray = fullData.slice(i, i + chunk);
-			groupOfArray.push(tempArray);
-		}
-		const finalArray = groupOfArray[index];
-
-		this.setState({ showHourly: !this.state.showHourly, hourlyData: finalArray });
+		this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly });
 	};
 
 	render() {
