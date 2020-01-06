@@ -43,11 +43,10 @@ class WeatherProvider extends Component {
 		};
 		const newDate = addDays(dateNow, index + 1);
 		const formatDate = moment(newDate).format('YYYY-MM-DD');
-		const dateOnly = formatDate;
 
-		const hourly = fullData.filter((reading) => reading.dt_txt.includes(dateOnly));
+		const hourly = fullData.filter((reading) => reading.dt_txt.includes(formatDate));
 
-		this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly }, () => console.log(`${dateOnly}`));
+		this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly }, () => console.log(`${newDate}`));
 	};
 
 	render() {
