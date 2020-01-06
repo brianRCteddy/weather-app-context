@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { WeatherConsumer } from '../../WeatherContext';
-
 var moment = require('moment');
 
 const Hourly = ({ data }) => {
@@ -16,7 +14,7 @@ const Hourly = ({ data }) => {
 		<div>
 			<div className="card">
 				<h3 className="card-title">{moment(newDate).format('dddd')}</h3>
-				<p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
+				<p className="text-muted">{moment(newDate).format('MMMM Do, hh:mm a')}</p>
 				<i className={imgUrl} />
 				<h3>
 					<span className="min-temp">{Math.round(celsius_min)} °C -</span>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { WeatherConsumer } from '../../WeatherContext';
 
@@ -20,7 +20,7 @@ const Daily = ({ reading, index }) => {
 				<div className="col-sm-2">
 					<div className="card" onClick={() => onToggle(index)}>
 						<h3 className="card-title">{moment(newDate).format('dddd')}</h3>
-						<p className="text-muted">{moment(newDate).format('MMMM Do, h:mm a')}</p>
+						<p className="text-muted">{moment(newDate).format('MMMM Do, hh:mm a')}</p>
 						<i className={imgUrl} />
 						<h3>
 							<span className="min-temp">{Math.round(celsius_min)} °C -</span>

@@ -89,3 +89,50 @@ toggleClickHandler = (index) => {
 
 	this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly });
 };
+
+//////
+
+function pad(n) {
+	return n < 10 ? '0' + n : n;
+}
+var now = new Date();
+var utc_timestamp =
+	now.getUTCFullYear() +
+	'-' +
+	pad(now.getUTCMonth() + 1) +
+	'-' +
+	pad(now.getUTCDate()) +
+	' ' +
+	pad(now.getUTCHours()) +
+	':' +
+	pad(now.getUTCMinutes()) +
+	':' +
+	pad(now.getUTCSeconds());
+
+const getDateOnly = (date) => {
+	const dateTime = date.split(' ');
+	const dateSplit = dateTime[0];
+	return dateSplit;
+};
+
+const addDays = (date, days) => {
+	const copy = new Date(Number(date));
+	copy.setDate(date.getDate() + days);
+	return copy;
+};
+
+var dateOnly = getDateOnly(utc_timestamp);
+var newDate = addDays(dateOnly, 1);
+
+const addDays = (date, days) => {
+	const splitDate = date.split('-');
+	const newDate = Number(splitDate[2]) + days;
+	return splitDate[0] + '-' + splitDate[1] + '-' + pad(newDate);
+};
+
+var date = new Date();
+var utc_offset = date.getTimezoneOffset();
+
+date.setMinutes(date.getMinutes() + utc_offset);
+
+console.log(date);
