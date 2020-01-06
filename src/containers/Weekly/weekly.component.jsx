@@ -4,23 +4,23 @@ import { WeatherConsumer } from '../../WeatherContext';
 import Daily from '../../components/Daily/daily.component';
 import Hourly from '../../components/Hourly/hourly.component';
 
-const Weekly = ({ fullData }) => {
+const Weekly = () => {
 	return (
 		<WeatherConsumer>
-			{({ hourlyData, showHourly, dailyData }) => (
+			{({ dailyData, hourlyData, showHourly, onToggle }) => (
 				<div className="weekly-container">
 					<div className="container">
 						<h1 className="display-1 jumbotron">5 Day Forecast</h1>
 						<h5 className="display-5 text-muted">Mandaluyong, PH</h5>
 						<div className="row justify-content-center">
-							<Daily />
+							{dailyData.map((reading, index) => <Daily reading={reading} key={index} index={index} />)}
 						</div>
 						<br />
 						{showHourly ? (
 							<div className="container">
 								<h1 className="display-1 jumbotron">Hourly Forecast</h1>
 								<div className="row justify-content-center">
-									<Hourly />
+									{hourlyData.map((data, index) => <Hourly data={data} key={index} />)}
 								</div>
 							</div>
 						) : (

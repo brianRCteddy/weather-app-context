@@ -43,20 +43,33 @@ class WeatherProvider extends Component {
 			this.setState(
 				{
 					fullData: data.list,
-					dailyData: dailyData,
-					hourlyData: hourlyData
+					dailyData: dailyData
 				},
 				() => console.log(this.state)
 			);
 		});
 	}
 
-	toggleClickHandler = () => {
-		this.setState({ showHourly: !this.state.showHourly });
+	toggleClickHandler = (index) => {
+		const { fullData } = this.state;
+		let tempArray = [];
+		const groupOfArray = [];
+		let i = 0;
+		let j = 0;
+		const chunk = 8;
+
+		for (i = 2, j = fullData.length; i < j; i += chunk) {
+			tempArray = fullData.slice(i, i + chunk);
+			groupOfArray.push(tempArray);
+		}
+		const finalArray = groupOfArray[index];
+
+		this.setState({ showHourly: !this.state.showHourly, hourlyData: finalArray });
 	};
 
 	render() {
 		const { dailyData, fullData, hourlyData, showHourly } = this.state;
+		console.log(this.state);
 		return (
 			<Provider
 				value={{
@@ -74,16 +87,3 @@ class WeatherProvider extends Component {
 }
 
 export { WeatherProvider, Consumer as WeatherConsumer };
-
-/////////
-
-//to output Friday
-//const firstDay = moment(dateNow).format('dddd');
-
-// const newDailyData = {
-// 	...dailyData[0],
-// 	day: 'Friday'
-// };
-// console.log(newDailyData);
-
-// const finalDailyData = data.list.filter((reading) => reading.dt_txt.includes('Friday'));

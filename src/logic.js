@@ -25,3 +25,18 @@ const getDateOnly = (date) => {
 	const dateSplit = dateTime[0];
 	return dateSplit;
 };
+
+const groupedUsers = (users, index) => {
+	let { i, j } = 0;
+	let tempArray = [];
+	let finalArray = [];
+	const chunk = 3;
+
+	for (i = 0, j = users.length; i < j; i += chunk) {
+		tempArray = users.slice(i, i + chunk);
+		finalArray.push(tempArray);
+	}
+	return finalArray[index];
+};
+
+groupedUsers(users, 1);
