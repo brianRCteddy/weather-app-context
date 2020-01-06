@@ -89,16 +89,3 @@ class WeatherProvider extends Component {
 }
 
 export { WeatherProvider, Consumer as WeatherConsumer };
-
-/////////
-
-//to output Friday
-//const firstDay = moment(dateNow).format('dddd');
-
-// const newDailyData = {
-// 	...dailyData[0],
-// 	day: 'Friday'
-// };
-// console.log(newDailyData);
-
-// const finalDailyData = data.list.filter((reading) => reading.dt_txt.includes('Friday'));
