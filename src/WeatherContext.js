@@ -14,7 +14,7 @@ class WeatherProvider extends Component {
 	};
 
 	componentDidMount() {
-		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=london,uk&APPID=${apiConfig}`;
+		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
 			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
@@ -41,12 +41,13 @@ class WeatherProvider extends Component {
 			copy.setDate(date.getDate() + days);
 			return copy;
 		};
+
 		const newDate = addDays(dateNow, index + 1);
 		const formatDate = moment(newDate).format('YYYY-MM-DD');
 
 		const hourly = fullData.filter((reading) => reading.dt_txt.includes(formatDate));
 
-		this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly }, () => console.log(`${newDate}`));
+		this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly });
 	};
 
 	render() {

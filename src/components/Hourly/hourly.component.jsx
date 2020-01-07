@@ -3,9 +3,7 @@ import React from 'react';
 var moment = require('moment');
 
 const Hourly = ({ data }) => {
-	let newDate = new Date();
-	const weekday = data.dt * 1000;
-	newDate.setTime(weekday);
+	let newDate = new Date(data.dt_txt);
 
 	const imgUrl = `owf owf-${data.weather[0].id} owf-5x`;
 	const celsius_min = data.main.temp_min - 273.15;

@@ -11,7 +11,7 @@ const Weekly = () => {
 				<div className="weekly-container">
 					<div className="container">
 						<h1 className="display-1 jumbotron">5 Day Forecast</h1>
-						<h5 className="display-5 text-muted">London, UK</h5>
+						<h5 className="display-5 text-muted">Mandaluyong, PH</h5>
 						<div className="row justify-content-center">
 							{dailyData.map((reading, index) => <Daily reading={reading} key={index} index={index} />)}
 						</div>

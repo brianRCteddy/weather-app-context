@@ -6,9 +6,7 @@ import './daily.styles.css';
 var moment = require('moment');
 
 const Daily = ({ reading, index }) => {
-	let newDate = new Date();
-	const weekday = reading.dt * 1000;
-	newDate.setTime(weekday);
+	let newDate = new Date(reading.dt_txt);
 
 	const imgUrl = `owf owf-${reading.weather[0].id} owf-5x`;
 	const celsius_min = reading.main.temp_min - 273.15;
