@@ -1,30 +1,21 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-var moment = require('moment');
+import HourlyCard from './hourly-card.component.jsx';
+import { WeatherConsumer } from '../../WeatherContext';
 
-const Hourly = ({ data }) => {
-	let newDate = new Date(data.dt_txt);
-
-	const imgUrl = `owf owf-${data.weather[0].id} owf-5x`;
-	const celsius_min = data.main.temp_min - 273.15;
-	const celsius_max = data.main.temp_max - 273.15;
+const Hourly = () => {
 	return (
-		<div>
-			<div className="card">
-				<h3 className="card-title">{moment(newDate).format('dddd')}</h3>
-				<p className="text-muted">{moment(newDate).format('MMMM Do, hh:mm a')}</p>
-				<i className={imgUrl} />
-				<h3>
-					<span className="min-temp">{Math.round(celsius_min)} °C -</span>
-					<span className="max-temp"> {Math.round(celsius_max)} °C</span>
-				</h3>
-				<div className="card-body">
-					<p className="card-text">{data.weather[0].description}</p>
+		<WeatherConsumer>
+			{({ hourlyData }) => (
+				<div className="hourly-forecast">
+					<h1 className="display-1 jumbotron">Hourly Forecast</h1>
+					<div className="row justify-content-center">
+						{hourlyData.map((data, index) => <HourlyCard data={data} key={index} />)}
+					</div>
 				</div>
-			</div>
-		</div>
+			)}
+		</WeatherConsumer>
 	);
 };
-
 export default withRouter(Hourly);

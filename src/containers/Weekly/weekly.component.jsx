@@ -33,31 +33,12 @@ class Weekly extends Component {
 		console.log('Weekly', this.props);
 		return (
 			<WeatherConsumer>
-				{({ dailyData, hourlyData, showHourly }) => (
-					<div className="weekly-container">
-						<div className="container">
-							<p>{this.props.match.params.dt_txt}</p>
-							<br />
-							{showHourly ? (
-								<div className="hourly-forecast">
-									<h1 className="display-1 jumbotron">Hourly Forecast</h1>
-									<div className="row justify-content-center">
-										{hourlyData.map((data, index) => <Hourly data={data} key={index} />)}
-									</div>
-								</div>
-							) : (
-								<div className="daily-forecast">
-									<h1 className="display-1 jumbotron">5 Day Forecast</h1>
-									<h5 className="display-5 text-muted">Mandaluyong, PH</h5>
-									<div className="row justify-content-center">
-										{dailyData.map((reading, index) => (
-											<Daily reading={reading} key={index} index={index} />
-										))}
-									</div>
-									<h1>Click a Card</h1>
-								</div>
-							)}
-						</div>
+				{({ showHourly }) => (
+					<div className="weekly">
+						<p>{this.props.match.params.dt_txt}</p>
+						<br />
+						{showHourly ? <Hourly /> : <Daily />}
+						{post}
 					</div>
 				)}
 			</WeatherConsumer>
