@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { withRouter, Link, NavLink } from 'react-router-dom';
 
 import { WeatherConsumer } from '../../WeatherContext';
 
 import './daily.styles.css';
 var moment = require('moment');
 
-const Daily = ({ reading, index }) => {
+const Daily = ({ reading, index, history, match }) => {
 	let newDate = new Date(reading.dt_txt);
 
 	const imgUrl = `owf owf-${reading.weather[0].id} owf-5x`;
 	const celsius_min = reading.main.temp_min - 273.15;
 	const celsius_max = reading.main.temp_max - 273.15;
 
+	//() => history.push(`${match.url}${linkUrl}`)
+	const splitUrl = reading.dt_txt.split(' ');
+	const linkUrl = splitUrl[0];
 	return (
 		<WeatherConsumer>
 			{({ onToggle }) => (
@@ -19,7 +23,9 @@ const Daily = ({ reading, index }) => {
 					<div className="card" onClick={() => onToggle(index)}>
 						<h3 className="card-title">{moment(newDate).format('dddd')}</h3>
 						<p className="text-muted">{moment(newDate).format('MMMM Do, hh:mm a')}</p>
-						<i className={imgUrl} />
+						<NavLink to={'/' + linkUrl}>
+							<i className={imgUrl} />
+						</NavLink>
 						<h3>
 							<span className="min-temp">{Math.round(celsius_min)} °C -</span>
 							<span className="max-temp"> {Math.round(celsius_max)} °C</span>
@@ -34,4 +40,4 @@ const Daily = ({ reading, index }) => {
 	);
 };
 
-export default Daily;
+export default withRouter(Daily);

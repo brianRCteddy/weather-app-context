@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 var moment = require('moment');
 
@@ -26,4 +27,4 @@ const Hourly = ({ data }) => {
 	);
 };
 
-export default Hourly;
+export default withRouter(Hourly);

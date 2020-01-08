@@ -18,7 +18,6 @@ class WeatherProvider extends Component {
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
 			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
-
 			this.setState(
 				{
 					fullData: data.list,
