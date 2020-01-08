@@ -10,7 +10,7 @@ class WeatherProvider extends Component {
 		fullData: [],
 		dailyData: [],
 		hourlyData: [],
-		showHourly: false
+		showHourly: true
 	};
 
 	componentDidMount() {
@@ -18,13 +18,10 @@ class WeatherProvider extends Component {
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
 			const dailyData = data.list.filter((reading) => reading.dt_txt.includes('00:00:00'));
-			this.setState(
-				{
-					fullData: data.list,
-					dailyData: dailyData
-				},
-				() => console.log(this.state)
-			);
+			this.setState({
+				fullData: data.list,
+				dailyData: dailyData
+			});
 		});
 	}
 
@@ -46,7 +43,7 @@ class WeatherProvider extends Component {
 
 		const hourly = fullData.filter((reading) => reading.dt_txt.includes(formatDate));
 
-		this.setState({ showHourly: !this.state.showHourly, hourlyData: hourly });
+		this.setState({ hourlyData: hourly });
 	};
 
 	render() {
