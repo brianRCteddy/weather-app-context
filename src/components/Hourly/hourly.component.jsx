@@ -14,10 +14,6 @@ class Hourly extends Component {
 
 	componentDidMount() {
 		const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
-		//this.props.match.params.day
-		const now = new Date();
-		const day1 = now.getDay(now);
-		console.log('params', this.props.match.params.day);
 
 		const days = 6;
 		const forecastDays = [];
