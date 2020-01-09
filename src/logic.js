@@ -149,3 +149,47 @@ var seconds = '0' + date.getSeconds();
 
 // Will display time in 10:30:23 format
 var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+//
+const days = 5;
+const forecastDays = [];
+
+for (let i = 0; i < days; i++) {
+	const day = new Date();
+	const addDays = (day) => {
+		const copy = new Date(Number(day));
+		forecastDays.push(new Date(copy.setDate(day.getDate() + i)));
+	};
+	addDays(day);
+}
+
+const dayNames = [];
+for (let i = 0; i < forecastDays.length; i++) {
+	const getDayName = forecastDays[i].toString().split(' ');
+	const abrevDay = getDayName[0];
+	dayNames.push(abrevDay);
+}
+console.log(dayNames);
+
+//	const abrevDay;
+
+console.log(forecastDays);
+
+const day = 'Wed';
+const getRightDate = (arr) => {
+	const rightDate = '';
+	for (let i = 0; i < arr.length; i++) {
+		const dayNames = [];
+		const getDayName = arr[i].toString().split(' ');
+		const abrevDay = getDayName[0];
+		dayNames.push(abrevDay);
+
+		for (let j = 0; j < dayNames.length; j++) {
+			if (this.props.match.params.day === dayNames[j]) {
+				rightDate = forecastDays[j];
+			}
+		}
+	}
+	return rightDate;
+};
+getRightDate(day);

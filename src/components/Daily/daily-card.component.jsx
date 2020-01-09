@@ -15,7 +15,7 @@ const DailyCard = ({ reading, index }) => {
 
 	const getDayName = newDate.toString().split(' ');
 	const date = reading.dt_txt.split(' ');
-	const linkUrl = date[0];
+	const linkUrl = getDayName[0];
 
 	return (
 		<WeatherConsumer>
