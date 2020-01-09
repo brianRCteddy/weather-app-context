@@ -13,7 +13,7 @@ class Hourly extends Component {
 	};
 
 	componentDidMount() {
-		const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
+		const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=mandaluyong,ph&APPID=${apiConfig}`;
 
 		fetch(weatherUrl).then((res) => res.json()).then((data) => {
 			const forecastData = data.list.filter((reading) => reading.dt_txt.includes(this.props.match.params.day));
