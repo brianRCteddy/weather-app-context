@@ -14,7 +14,6 @@ const DailyCard = ({ reading, index }) => {
 	const celsius_max = reading.main.temp_max - 273.15;
 
 	const getDayName = newDate.toString().split(' ');
-	const date = reading.dt_txt.split(' ');
 	const linkUrl = getDayName[0];
 
 	return (

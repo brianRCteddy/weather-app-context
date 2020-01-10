@@ -32,7 +32,6 @@ class Hourly extends Component {
 			const dayNames = [];
 			for (let i = 0; i < arr.length; i++) {
 				const getDayName = arr[i].toString().split(' ');
-
 				const abrevDay = getDayName[0];
 				dayNames.push(abrevDay);
 
@@ -43,6 +42,7 @@ class Hourly extends Component {
 			}
 			return rightDate;
 		};
+
 		const rightDate = getRightDate(forecastDays);
 		const formattedDate = moment(rightDate).format('YYYY-MM-DD');
 
@@ -55,7 +55,6 @@ class Hourly extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		const { loadedForecast } = this.state;
 		let post = null;
 		if (loadedForecast) {

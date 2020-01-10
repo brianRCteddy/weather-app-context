@@ -27,7 +27,6 @@ class WeatherProvider extends Component {
 
 	toggleClickHandler = (index) => {
 		const { fullData } = this.state;
-
 		const dateNow = new Date();
 		var utc_offset = dateNow.getTimezoneOffset();
 		dateNow.setMinutes(dateNow.getMinutes() + utc_offset);
@@ -40,7 +39,6 @@ class WeatherProvider extends Component {
 
 		const newDate = addDays(dateNow, index + 1);
 		const formatDate = moment(newDate).format('YYYY-MM-DD');
-
 		const hourly = fullData.filter((reading) => reading.dt_txt.includes(formatDate));
 
 		this.setState({ hourlyData: hourly });
@@ -48,7 +46,6 @@ class WeatherProvider extends Component {
 
 	render() {
 		const { dailyData, fullData, hourlyData, showHourly } = this.state;
-		console.log(this.state);
 		return (
 			<Provider
 				value={{
